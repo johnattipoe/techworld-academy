@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . '/..\..\includes\lang\lang.php');
-include(__DIR__ . '/..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../includes/lang/lang.php');
+include(__DIR__ . '/../../includes/header/header.php');
+include(__DIR__ . '/../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../includes/sidebar/sidebar.php');
 
 // Array of available jobs
 $jobs = [
@@ -190,6 +190,6 @@ document.getElementById("searchBox").addEventListener("keyup", function() {
 </script>
 
 <?php
-include(__DIR__ . '/..\..\Modals\modals\modals.php');
-include(__DIR__ . '/..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../Modals/modals/modals.php');
+include(__DIR__ . '/../../includes/footer/footer.php');
 ?>

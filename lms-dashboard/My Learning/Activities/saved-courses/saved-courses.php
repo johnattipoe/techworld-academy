@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/..\..\..\..\Database\db\db.php');
+require_once(__DIR__ . '/../../../../Database/db/db.php');
 
 if(!isset($_SESSION['username'])){
   $_SESSION['username'] = "Student";
@@ -57,9 +57,9 @@ try {
 
 $totalSaved = count($savedCourses);
 
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 
 ?>
 
@@ -427,5 +427,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <?php
-include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../../includes/footer/footer.php');
 ?>

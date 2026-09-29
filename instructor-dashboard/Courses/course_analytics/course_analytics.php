@@ -41,9 +41,9 @@ if ($instructor_id) {
     $course_performance = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-include(__DIR__ . '/..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../includes/header/header.php');
+include(__DIR__ . '/../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../includes/sidebar/sidebar.php');
 ?>
 <main class="main-content flex-fill">
     <div class="container-fluid p-4">
@@ -159,4 +159,4 @@ new Chart(document.getElementById('analyticsChart'), {
 });
 </script>
 
-<?php include(__DIR__ . '/..\..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../../includes/footer/footer.php'); ?>

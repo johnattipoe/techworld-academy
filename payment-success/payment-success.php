@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/..\Database\db\db.php');
+require_once(__DIR__ . '/../Database/db/db.php');
 
 // Get course ID from session or query parameter
 $courseId = $_GET['course_id'] ?? $_SESSION['enrolled_course_id'] ?? null;
@@ -22,8 +22,8 @@ if ($courseId) {
     $courseName = $course['title'] ?? 'Your Course';
 }
 
-include(__DIR__ . '/..\includes\header\header.php');
-include(__DIR__ . '/..\includes\navbar\navbar.php');
+include(__DIR__ . '/../includes/header/header.php');
+include(__DIR__ . '/../includes/navbar/navbar.php');
 ?>
 
 <section class="py-5">
@@ -112,4 +112,4 @@ include(__DIR__ . '/..\includes\navbar\navbar.php');
     </div>
 </section>
 
-<?php include(__DIR__ . '/..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../includes/footer/footer.php'); ?>

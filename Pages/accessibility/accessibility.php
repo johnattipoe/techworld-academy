@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . '/..\..\includes\lang\lang.php');
-include(__DIR__ . '/..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../includes/lang/lang.php');
+include(__DIR__ . '/../../includes/header/header.php');
+include(__DIR__ . '/../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../includes/sidebar/sidebar.php');
 ?>
 
 <div class="container mt-5 mb-5" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-once="true" data-aos-anchor-placement="top-center" data-aos-anchor="#content" data-aos-mirror-trigger-element="#content">
@@ -547,6 +547,6 @@ include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
 </div>
 
 <?php
-include(__DIR__ . '/..\..\Modals\modals\modals.php'); 
-include(__DIR__ . '/..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../Modals/modals/modals.php'); 
+include(__DIR__ . '/../../includes/footer/footer.php');
 ?>

@@ -1,9 +1,9 @@
 <?php 
 session_start();
-include(__DIR__ . '/..\..\..\includes\lang\lang.php');
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php'); 
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/lang/lang.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php'); 
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 ?>
 
 <!-- FINANCIAL MANAGEMENT.PHP -->
@@ -90,4 +90,4 @@ include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
   </div>
 </section>
 
-<?php include(__DIR__ . '/..\..\..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../../../includes/footer/footer.php'); ?>

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/..\..\utils\logger\logger.php');
+require_once(__DIR__ . '/../../utils/logger/logger.php');
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
   require_once(__DIR__ . '/../vendor/autoload.php');
 }
@@ -7,9 +7,9 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
 use TWApp\Mailer;
 
 session_start();
-include(__DIR__ . '/..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../includes/header/header.php');
+include(__DIR__ . '/../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../includes/sidebar/sidebar.php');
 $message = '';
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -72,4 +72,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
 </main>
-<?php include(__DIR__ . '/..\..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../../includes/footer/footer.php'); ?>

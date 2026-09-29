@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . '/..\..\fpdf\fpdf.php');
+require(__DIR__ . '/../../fpdf/fpdf.php');
 
 $pdf = new FPDF();
 $pdf->AddFont('CevicheOne','','CevicheOne-Regular.php','.');

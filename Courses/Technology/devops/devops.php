@@ -1,9 +1,9 @@
 <?php 
 session_start();
-include(__DIR__ . '/..\..\..\includes\lang\lang.php');
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/lang/lang.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 ?>
 <!-- Hero Section -->
 <section class="py-5 bg-success text-white text-center" data-aos="fade-up">
@@ -34,6 +34,6 @@ include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
 </div>
 
 <?php 
-include(__DIR__ . '/..\..\..\Modals\modals\modals.php'); 
-include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../../Modals/modals/modals.php'); 
+include(__DIR__ . '/../../../includes/footer/footer.php');
 ?>

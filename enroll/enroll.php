@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once(__DIR__ . '/..\config\env\env.php');
-require_once(__DIR__ . '/..\Database\db\db.php');
-require_once(__DIR__ . '/..\Payment-System\config\payment_config\payment_config.php');
-require_once(__DIR__ . '/..\Payment-System\config\database\database.php');
-require_once(__DIR__ . '/..\Payment-System\modules\payment_manager\payment_manager.php');
+require_once(__DIR__ . '/../config/env/env.php');
+require_once(__DIR__ . '/../Database/db/db.php');
+require_once(__DIR__ . '/../Payment-System/config/payment_config/payment_config.php');
+require_once(__DIR__ . '/../Payment-System/config/database/database.php');
+require_once(__DIR__ . '/../Payment-System/modules/payment_manager/payment_manager.php');
 
 // Load environment variables
 EnvLoader::load();
@@ -162,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include(__DIR__ . '/..\includes\header\header.php');
-include(__DIR__ . '/..\includes\navbar\navbar.php');
+include(__DIR__ . '/../includes/header/header.php');
+include(__DIR__ . '/../includes/navbar/navbar.php');
 ?>
 
 <section class="py-5 bg-light">
@@ -369,4 +369,4 @@ document.getElementById('paymentOption').addEventListener('change', function() {
 });
 </script>
 
-<?php include(__DIR__ . '/..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../includes/footer/footer.php'); ?>

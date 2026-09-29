@@ -7,7 +7,7 @@
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
-require(__DIR__ . '/..\ttfparser\ttfparser.php');
+require(__DIR__ . '/../ttfparser/ttfparser.php');
 
 function Message($txt, $severity='')
 {

@@ -1,8 +1,8 @@
 <?php
 session_start();
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 
 $faqCategories = [
     [
@@ -368,5 +368,5 @@ function rateFAQ(rating) {
 }
 </script>
 <?php
-include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../../includes/footer/footer.php');
 ?>

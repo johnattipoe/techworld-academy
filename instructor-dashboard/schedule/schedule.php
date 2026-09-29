@@ -22,9 +22,9 @@ $stmt = $pdo->prepare(
 $stmt->execute([$instructor_id]);
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-include(__DIR__ . '/..\includes\header\header.php');
-include(__DIR__ . '/..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../includes/header/header.php');
+include(__DIR__ . '/../includes/navbar/navbar.php');
+include(__DIR__ . '/../includes/sidebar/sidebar.php');
 ?>
 <main class="main-content flex-fill">
   <div class="container-fluid p-4">
@@ -83,4 +83,4 @@ include(__DIR__ . '/..\includes\sidebar\sidebar.php');
     </div>
   </div>
 </main>
-<?php include(__DIR__ . '/..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../includes/footer/footer.php'); ?>

@@ -1,6 +1,6 @@
 <?php
 // ../process/login-process.php
-require_once(__DIR__ . '/..\..\system files\config\config.php');
+require_once(__DIR__ . '/../../system files/config/config.php');
 // Add login attempt logging and account lockout
 define('MAX_LOGIN_ATTEMPTS', 5);
 define('LOCKOUT_MINUTES', 15);

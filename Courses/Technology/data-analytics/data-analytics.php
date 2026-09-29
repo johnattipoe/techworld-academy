@@ -1,5 +1,5 @@
-<?php include(__DIR__ . '/..\..\..\includes\header\header.php'); ?>
-<?php include(__DIR__ . '/..\..\..\includes\navbar\navbar.php'); ?>
+<?php include(__DIR__ . '/../../../includes/header/header.php'); ?>
+<?php include(__DIR__ . '/../../../includes/navbar/navbar.php'); ?>
 
 <!-- DATA-ANALYTICS.PHP -->
 
@@ -305,4 +305,4 @@
     </div>
 </section>
 
-<?php include(__DIR__ . '/..\..\..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../../../includes/footer/footer.php'); ?>

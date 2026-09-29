@@ -127,9 +127,9 @@ $activeDescription = $activeLesson['description'] ?? '';
 $activeContent = $activeLesson['content'] ?? '';
 $activeVideoUrl = $activeLesson['video_url'] ?? '';
 
-include(__DIR__ . '/..\includes\header\header.php');
-include(__DIR__ . '/..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../includes/header/header.php');
+include(__DIR__ . '/../includes/navbar/navbar.php');
+include(__DIR__ . '/../includes/sidebar/sidebar.php');
 ?>
 
 <style>
@@ -728,7 +728,7 @@ function showNotification(message, type) {
 }
 </script>
 
-<?php include(__DIR__ . '/..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../includes/footer/footer.php'); ?>
 
 
 

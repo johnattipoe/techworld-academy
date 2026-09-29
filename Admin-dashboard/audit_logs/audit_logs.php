@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/..\..\utils\logger\logger.php');
+require_once(__DIR__ . '/../../utils/logger/logger.php');
 session_start();
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
     log_action('unknown', 'audit_logs_access', 'unauthorized');

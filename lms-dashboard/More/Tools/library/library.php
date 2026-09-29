@@ -250,5 +250,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php
-include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../../includes/footer/footer.php');
 ?>

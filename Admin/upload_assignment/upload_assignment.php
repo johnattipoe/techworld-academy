@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . '/..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\includes\sidebar\sidebar.php');
-require_once(__DIR__ . '/..\..\utils\upload_handler\upload_handler.php');
+include(__DIR__ . '/../../includes/header/header.php');
+include(__DIR__ . '/../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../includes/sidebar/sidebar.php');
+require_once(__DIR__ . '/../../utils/upload_handler/upload_handler.php');
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = handle_file_upload('assignment_file');
@@ -64,5 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </main>
 
 <?php 
-include(__DIR__ . '/..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../includes/footer/footer.php');
  ?>

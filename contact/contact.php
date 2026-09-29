@@ -1,6 +1,6 @@
 <?php
 // Load security libraries
-require_once(__DIR__ . '/..\utils\security\security\security.php');
+require_once(__DIR__ . '/../utils/security/security/security.php');
 
 // Initialize security
 initSecurity();
@@ -49,10 +49,10 @@ if (isPostRequest()) {
     }
 }
 
-include(__DIR__ . '/..\includes\lang\lang.php'); 
-include(__DIR__ . '/..\includes\header\header.php'); 
-include(__DIR__ . '/..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\includes\sidebar\sidebar.php'); 
+include(__DIR__ . '/../includes/lang/lang.php'); 
+include(__DIR__ . '/../includes/header/header.php'); 
+include(__DIR__ . '/../includes/navbar/navbar.php');
+include(__DIR__ . '/../includes/sidebar/sidebar.php'); 
 ?>
 
 <!-- Contact Hero Section -->
@@ -570,6 +570,6 @@ include(__DIR__ . '/..\includes\sidebar\sidebar.php');
 </section>
 
 <?php
-include(__DIR__ . '/..\Modals\modals\modals.php'); 
-include(__DIR__ . '/..\includes\footer\footer.php'); 
+include(__DIR__ . '/../Modals/modals/modals.php'); 
+include(__DIR__ . '/../includes/footer/footer.php'); 
 ?>

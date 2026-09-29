@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once(__DIR__ . '/..\..\..\..\Database\db\db.php');
+require_once(__DIR__ . '/../../../../Database/db/db.php');
 
 if(!isset($_SESSION['username'])){
   $_SESSION['username'] = "Student";
@@ -66,9 +66,9 @@ $totalCompleted = count(array_filter($enrolled_courses, function($c) { return $c
 $totalInProgress = count(array_filter($enrolled_courses, function($c) { return $c['progress'] > 0 && $c['progress'] < 100; }));
 $avgProgress = $totalEnrolled > 0 ? round(array_sum(array_column($enrolled_courses, 'progress')) / $totalEnrolled) : 0;
 
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php');
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php');
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 ?>
 
 <div class="container-fluid py-4">
@@ -334,4 +334,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php include(__DIR__ . '/..\..\..\includes\footer\footer.php'); ?>
+<?php include(__DIR__ . '/../../../includes/footer/footer.php'); ?>

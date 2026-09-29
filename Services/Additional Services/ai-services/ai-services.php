@@ -1,9 +1,9 @@
 <?php 
 session_start();
-include(__DIR__ . '/..\..\..\includes\lang\lang.php');
-include(__DIR__ . '/..\..\..\includes\header\header.php');
-include(__DIR__ . '/..\..\..\includes\navbar\navbar.php'); 
-include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+include(__DIR__ . '/../../../includes/lang/lang.php');
+include(__DIR__ . '/../../../includes/header/header.php');
+include(__DIR__ . '/../../../includes/navbar/navbar.php'); 
+include(__DIR__ . '/../../../includes/sidebar/sidebar.php');
 ?>
 ?>
 
@@ -23,6 +23,6 @@ include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
 <section class="py-5 bg-light"><div class="container"><div class="row g-4 align-items-center"><div class="col-lg-6"><h2 class="fw-bold">From idea to measurable impact</h2><p class="text-muted">We start with a focused use case, validate its value, and build a solution your team can understand and maintain.</p><div class="d-flex gap-3 mb-3"><span class="badge bg-primary rounded-pill">01</span><div><strong>Discover</strong><p class="small text-muted mb-0">Define the business problem and success measures.</p></div></div><div class="d-flex gap-3 mb-3"><span class="badge bg-primary rounded-pill">02</span><div><strong>Prototype</strong><p class="small text-muted mb-0">Test the solution with real workflows and data.</p></div></div><div class="d-flex gap-3"><span class="badge bg-primary rounded-pill">03</span><div><strong>Deploy</strong><p class="small text-muted mb-0">Launch, monitor, and improve with your team.</p></div></div></div><div class="col-lg-6"><div class="p-4 bg-white rounded shadow-sm"><h3 class="h5">Ready to explore AI?</h3><p class="text-muted">Tell us what you want to improve and we will suggest a practical next step.</p><a href="/contact/contact.php?service=ai-services" class="btn btn-primary">Book a discovery call</a></div></div></div></div></section>
 
 <?php
-include(__DIR__ . '/..\..\..\Modals\modals\modals.php'); 
-include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+include(__DIR__ . '/../../../Modals/modals/modals.php'); 
+include(__DIR__ . '/../../../includes/footer/footer.php');
 ?>

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($message_type !== 'success') log_action($username, 'register', 'failed');
 }
-?>include(__DIR__ . '/..\..\includes\header\header.php');
+?>include(__DIR__ . '/../../includes/header/header.php');
 include(__DIR__ . '/../includes/loading.php');
 
 ?>

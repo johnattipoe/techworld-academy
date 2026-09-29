@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include(__DIR__ . '/..\..\includes\header\header.php');
+include(__DIR__ . '/../../includes/header/header.php');
 include(__DIR__ . '/../includes/loading.php');
 
  ?>

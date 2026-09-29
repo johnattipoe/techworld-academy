@@ -2,7 +2,7 @@
 session_start();
 $dashboardLanguageScope = 'lms';
 require_once dirname(__DIR__, 4) . '/utils/i18n/dashboard.php';
-require_once(__DIR__ . '/..\..\..\..\Database\db\db.php');
+require_once(__DIR__ . '/../../../../Database/db/db.php');
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: ../../../authenication/login.php");

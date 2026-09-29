@@ -388,7 +388,7 @@ include(__DIR__ . '/../includes/navbar/navbar.php');
 
 <?php
 
- include(__DIR__ . '/..\includes\footer\footer.php'); 
+ include(__DIR__ . '/../includes/footer/footer.php'); 
  ?>
 
 
