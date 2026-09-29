@@ -4,8 +4,8 @@
  */
 
 class PaymentDB {
-    private static $instance = null;
-    private $connection;
+    private static ?self $instance = null;
+    private PDO $connection;
     
     private function __construct() {
         try {
@@ -43,14 +43,14 @@ class PaymentDB {
         }
     }
     
-    public static function getInstance() {
+    public static function getInstance(): self {
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
     
-    public function getConnection() {
+    public function getConnection(): PDO {
         return $this->connection;
     }
     
