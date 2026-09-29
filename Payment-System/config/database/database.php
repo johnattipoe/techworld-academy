@@ -14,6 +14,8 @@ class PaymentDB {
             $dbname = getenv('DB_DATABASE') ?: 'techworld_db';
             $username = getenv('DB_USERNAME') ?: 'root';
             $password = getenv('DB_PASSWORD') ?: '';
+            $ssl = filter_var(getenv('DB_SSL') ?: 'false', FILTER_VALIDATE_BOOLEAN);
+            $sslCa = getenv('DB_SSL_CA') ?: '';
             
             $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
             
@@ -22,6 +24,17 @@ class PaymentDB {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
             ];
+
+            if ($ssl) {
+                if ($sslCa !== '') {
+                    $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+                }
+
+                $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = filter_var(
+                    getenv('DB_SSL_VERIFY') ?: 'true',
+                    FILTER_VALIDATE_BOOLEAN
+                );
+            }
             
             $this->connection = new PDO($dsn, $username, $password, $options);
             

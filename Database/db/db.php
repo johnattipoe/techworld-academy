@@ -10,6 +10,8 @@ function get_db() {
     $user = env('DB_USERNAME', 'root');
     $pass = env('DB_PASSWORD', '');
     $charset = env('DB_CHARSET', 'utf8mb4');
+    $ssl = filter_var(env('DB_SSL', false), FILTER_VALIDATE_BOOLEAN);
+    $sslCa = (string)env('DB_SSL_CA', '');
     
     $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
     
@@ -18,6 +20,17 @@ function get_db() {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
+
+    if ($ssl) {
+        if ($sslCa !== '') {
+            $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+        }
+
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = filter_var(
+            env('DB_SSL_VERIFY', true),
+            FILTER_VALIDATE_BOOLEAN
+        );
+    }
     
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
