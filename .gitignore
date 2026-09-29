@@ -1,0 +1,60 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Logs
+/logs/*.log
+*.log
+
+# Upload directories
+/upload/*
+!/upload/.gitkeep
+
+# Backup files
+/backup/*
+!/backup/.gitkeep
+
+# Cache
+/cache/*
+!/cache/.gitkeep
+
+# Composer
+composer.phar
+composer.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/*
+
+# User uploads
+/assets/uploads/*
+!/assets/uploads/.gitkeep
+
+# Database
+*.sql
+*.sqlite
+*.db
+
+# Configuration files with sensitive data
+/config/api_keys.php
+
+# Session files
+/sessions/*

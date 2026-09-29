@@ -1,0 +1,17 @@
+#dashboardLoadingScreen {
+  position: fixed; inset: 0; z-index: 5000; display: grid; place-items: center;
+  padding: 24px; background: radial-gradient(circle at 18% 18%, rgba(91, 117, 255, .16), transparent 32%), radial-gradient(circle at 82% 76%, rgba(27, 190, 170, .14), transparent 34%), #f7f9fc;
+  opacity: 1; visibility: visible; transition: opacity .28s ease, visibility .28s ease;
+}
+body.dashboard-loading { overflow: hidden; }
+#dashboardLoadingScreen.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.dashboard-loader-card { display: grid; justify-items: center; gap: 12px; min-width: min(300px, 88vw); padding: 28px 36px; border: 1px solid rgba(148, 163, 184, .22); border-radius: 22px; background: rgba(255,255,255,.92); box-shadow: 0 24px 70px rgba(26, 39, 71, .13); color: #17233e; text-align: center; }
+.dashboard-loader-mark { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 17px; color: #fff; background: linear-gradient(135deg, #536dfe, #20b8a7); box-shadow: 0 10px 24px rgba(83,109,254,.25); font-size: 23px; }
+.dashboard-loader-spinner { width: 23px; height: 23px; border: 2px solid rgba(83,109,254,.18); border-top-color: #536dfe; border-radius: 50%; animation: dashboard-loader-spin .75s linear infinite; }
+.dashboard-loader-title { font: 700 16px/1.3 system-ui, sans-serif; letter-spacing: -.01em; }
+.dashboard-loader-caption { color: #718096; font: 400 13px/1.4 system-ui, sans-serif; }
+@keyframes dashboard-loader-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  #dashboardLoadingScreen { transition: none; }
+  .dashboard-loader-spinner { animation: none; border-top-color: #536dfe; }
+}

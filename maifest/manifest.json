@@ -1,0 +1,23 @@
+{
+  "name": "TecWorld Academy",
+  "short_name": "TWA",
+  "version": "1.0",
+  "description": "Learn to code with the best",
+  "icons": [
+    {
+      "src": "/assets/images/logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/assets/images/logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2575fc",
+  "prefer_related_applications": false
+}

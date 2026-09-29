@@ -1,0 +1,16 @@
+<?php
+session_start();
+if (($_SESSION['role'] ?? '') !== 'admin' || empty($_SESSION['user_id'])) { header('Location: /authenication/login/login.php'); exit; }
+require_once(__DIR__ . '/../../Database/db/db.php');
+$pdo=get_db();$labels=[];$months=[];$chartError='';$cursor=new DateTimeImmutable('first day of this month');
+for($offset=11;$offset>=0;$offset--){$month=$cursor->modify('-'.$offset.' months');$key=$month->format('Y-m');$labels[]=$month->format('M Y');$months[$key]=0;}
+try{$from=$cursor->modify('-11 months')->format('Y-m-01 00:00:00');$until=$cursor->modify('+1 month')->format('Y-m-d H:i:s');$stmt=$pdo->prepare("SELECT DATE_FORMAT(created_at,'%Y-%m') AS month_key,COUNT(*) AS total FROM enrollments WHERE created_at>=? AND created_at<? GROUP BY month_key");$stmt->execute([$from,$until]);foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row){if(array_key_exists($row['month_key'],$months))$months[$row['month_key']]=(int)$row['total'];}}
+catch(PDOException $e){error_log('Admin analytics query failed: '.$e->getMessage());$chartError='Enrollment analytics are temporarily unavailable.';}
+$values=array_values($months);$pageTitle='Analytics and reporting';
+include(__DIR__.'/../includes/header/header.php');include(__DIR__.'/../includes/navbar/navbar.php');include(__DIR__.'/../includes/sidebar/sidebar.php');
+?>
+<main class="main-content flex-fill"><div class="container-fluid p-4"><div class="page-heading"><div><span class="page-kicker">REPORTS</span><h1>Analytics and reporting</h1><p>Monthly enrollments for the last twelve months.</p></div><button type="button" class="btn btn-outline-primary" id="exportEnrollmentChart"><i class="fa-solid fa-download me-1"></i>Export chart</button></div>
+<?php if($chartError):?><div class="alert alert-warning"><?=htmlspecialchars($chartError,ENT_QUOTES,'UTF-8')?></div><?php endif;?>
+<section class="card border-0"><div class="card-body p-4"><script type="application/json" id="adminAnalyticsData"><?=json_encode(['labels'=>$labels,'values'=>$values],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT)?></script><div style="position:relative;height:360px;max-height:60vh"><canvas id="adminAnalyticsChart" role="img" aria-label="Monthly enrollment trend"></canvas></div><?php if(array_sum($values)===0):?><p class="text-muted text-center mt-3 mb-0">No enrollments were recorded during this period.</p><?php endif;?></div></section></div></main>
+<script>document.addEventListener('DOMContentLoaded',function(){const c=document.getElementById('adminAnalyticsChart'),n=document.getElementById('adminAnalyticsData');if(!c||!n||!window.Chart)return;const d=JSON.parse(n.textContent);const chart=new Chart(c,{type:'line',data:{labels:d.labels,datasets:[{label:window.twDashTranslate('Enrollments'),data:d.values,borderColor:'#5146e5',backgroundColor:'rgba(81,70,229,.1)',fill:true,tension:.35,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{precision:0}}}}});document.getElementById('exportEnrollmentChart')?.addEventListener('click',function(){const a=document.createElement('a');a.href=chart.toBase64Image();a.download='enrollment-trend.png';a.click();});});</script>
+<?php include(__DIR__.'/../includes/footer/footer.php'); ?>

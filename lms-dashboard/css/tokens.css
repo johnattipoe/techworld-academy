@@ -1,0 +1,5 @@
+:root { --dashboard-brand: #635bdb; --dashboard-ink: #20263a; --dashboard-line: #e8e9f2; }
+body { color: var(--dashboard-ink); }
+.card { border-color: var(--dashboard-line); border-radius: 1rem; }
+:focus-visible { outline: 3px solid rgba(99, 91, 219, .38); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

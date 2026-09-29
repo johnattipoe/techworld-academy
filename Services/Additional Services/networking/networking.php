@@ -1,0 +1,16 @@
+<?php 
+session_start();
+include(__DIR__ . '/..\..\..\includes\lang\lang.php');
+include(__DIR__ . '/..\..\..\includes\header\header.php');
+include(__DIR__ . '/..\..\..\includes\navbar\navbar.php'); 
+include(__DIR__ . '/..\..\..\includes\sidebar\sidebar.php');
+?>
+
+<section class="bg-dark text-white py-5" data-aos="fade-down"><div class="container"><div class="row align-items-center g-4"><div class="col-lg-7"><span class="badge bg-warning text-dark mb-3">Additional Services</span><h1 class="display-4 fw-bold mb-3">Connected, Secure, and Ready to Grow</h1><p class="lead mb-4">Build dependable networks that keep your people, systems, and customers connected.</p><a href="/contact/contact.php?service=networking" class="btn btn-warning btn-lg">Plan Your Network</a></div><div class="col-lg-5 text-center"><img src="/assets/campus/computer lab.jpeg" alt="Network infrastructure" class="img-fluid rounded shadow"></div></div></div></section>
+<section class="py-5" data-aos="fade-up"><div class="container"><div class="row g-4"><div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body p-4"><i class="bi bi-diagram-3 fs-1 text-primary"></i><h2 class="h5 mt-3">Network Design</h2><p class="text-muted mb-0">Plan wired and wireless infrastructure around your space, users, and growth.</p></div></div></div><div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body p-4"><i class="bi bi-wifi fs-1 text-success"></i><h2 class="h5 mt-3">Secure Connectivity</h2><p class="text-muted mb-0">Improve access, segmentation, and protection across your organization.</p></div></div></div><div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body p-4"><i class="bi bi-activity fs-1 text-warning"></i><h2 class="h5 mt-3">Monitoring</h2><p class="text-muted mb-0">Identify performance issues early with practical monitoring and support.</p></div></div></div></div></div></section>
+<section class="py-5 bg-light"><div class="container"><div class="row g-4"><div class="col-lg-6"><h2 class="fw-bold">A network built for your work</h2><p class="text-muted">We assess your current setup, document the risks, and deliver an improvement plan your team can operate.</p><ul class="list-unstyled"><li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Coverage and capacity assessment</li><li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Security and access review</li><li><i class="bi bi-check-circle-fill text-success me-2"></i>Implementation and ongoing support</li></ul></div><div class="col-lg-6"><div class="bg-white rounded shadow-sm p-4"><h3 class="h5">Need a stronger connection?</h3><p class="text-muted">Share your current challenge and our team will recommend the next step.</p><a href="/contact/contact.php?service=networking" class="btn btn-dark">Request a network assessment</a></div></div></div></div></section>
+
+<?php
+include(__DIR__ . '/..\..\..\Modals\modals\modals.php'); 
+include(__DIR__ . '/..\..\..\includes\footer\footer.php');
+ ?>
