@@ -4,6 +4,10 @@ $uri = rawurldecode($uri);
 $path = $uri === '/' ? '/index/index.php' : $uri;
 
 $resolved = __DIR__ . $path;
+if ($path === '/index.php' || $resolved === __FILE__) {
+    $resolved = __DIR__ . '/index/index.php';
+}
+
 if (is_file($resolved)) {
     $staticExtensions = ['css', 'gif', 'ico', 'jpeg', 'jpg', 'js', 'png', 'svg', 'webp', 'woff', 'woff2'];
     if (in_array(strtolower(pathinfo($resolved, PATHINFO_EXTENSION)), $staticExtensions, true)) {
