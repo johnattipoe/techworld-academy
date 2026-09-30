@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 include(__DIR__ . '/../../../includes/lang/lang.php');
 include(__DIR__ . '/../../../includes/header/header.php');
