@@ -38,7 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $email = $full_name = $phone = '';
         } catch (PDOException $e) {
             log_action('system', 'register_error', $e->getMessage());
-            $message = 'That username or email may already be registered. Please check and try again.';
+            $isDuplicate = (int)($e->errorInfo[1] ?? 0) === 1062;
+            $message = $isDuplicate
+                ? 'That username or email may already be registered. Please check and try again.'
+                : 'Registration could not be completed because of a database error. Please try again later.';
         }
     }
     if ($message_type !== 'success') log_action($username, 'register', 'failed');
