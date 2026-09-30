@@ -50,6 +50,7 @@ $e = static function ($value): string {
   <meta name="twitter:image" content="<?= $e($page_tw_image) ?>">
   <meta name="theme-color" content="<?= $e($theme_color) ?>">
   <meta name="apple-mobile-web-app-capable" content="<?= $e($apple_mobile_web_app_capable) ?>">
+  <meta name="mobile-web-app-capable" content="<?= $e($apple_mobile_web_app_capable) ?>">
   <meta name="apple-mobile-web-app-status-bar-style" content="<?= $e($apple_mobile_web_app_status_bar_style) ?>">
   <link rel="icon" href="/assets/images/logo.jpeg" type="image/jpeg">
   <link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
