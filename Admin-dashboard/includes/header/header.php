@@ -35,3 +35,15 @@ $adminTheme = (($_SESSION['admin_theme'] ?? 'light') === 'dark') ? 'dark-theme' 
     <span class="dashboard-loader-caption">Preparing your dashboard</span>
   </div>
 </div>
+<script>
+(function () {
+  window.setTimeout(function () {
+    var screen = document.getElementById('dashboardLoadingScreen');
+    if (screen) {
+      screen.classList.add('is-hidden');
+      screen.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dashboard-loading');
+    }
+  }, 10000);
+})();
+</script>

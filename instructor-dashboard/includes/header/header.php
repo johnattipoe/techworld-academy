@@ -17,5 +17,17 @@ $pageTitle = isset($pageTitle) ? $pageTitle : 'Instructor workspace';
 <div id="dashboardLoadingScreen" role="status" aria-live="polite" aria-label="Loading instructor workspace">
   <div class="dashboard-loader-card"><span class="dashboard-loader-mark" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></span><span class="dashboard-loader-spinner" aria-hidden="true"></span><strong class="dashboard-loader-title">Loading instructor workspace</strong><span class="dashboard-loader-caption">Preparing your courses and students</span></div>
 </div>
+<script>
+(function () {
+  window.setTimeout(function () {
+    var screen = document.getElementById('dashboardLoadingScreen');
+    if (screen) {
+      screen.classList.add('is-hidden');
+      screen.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dashboard-loading');
+    }
+  }, 10000);
+})();
+</script>
 
 

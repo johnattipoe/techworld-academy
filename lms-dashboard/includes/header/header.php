@@ -61,6 +61,18 @@ $csrf_token = CSRF::generateToken();
 <div id="dashboardLoadingScreen" role="status" aria-live="polite" aria-label="Loading learning dashboard">
   <div class="dashboard-loader-card"><span class="dashboard-loader-mark" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span><span class="dashboard-loader-spinner" aria-hidden="true"></span><strong class="dashboard-loader-title">Loading your learning space</strong><span class="dashboard-loader-caption">Getting your courses and resources ready</span></div>
 </div>
+<script>
+(function () {
+  window.setTimeout(function () {
+    var screen = document.getElementById('dashboardLoadingScreen');
+    if (screen) {
+      screen.classList.add('is-hidden');
+      screen.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dashboard-loading');
+    }
+  }, 10000);
+})();
+</script>
 
 
 
