@@ -12,16 +12,27 @@ try {
             c.*,
             u.full_name as instructor,
             COALESCE(cat.name, 'General') as category,
-            COUNT(DISTINCT e.id) as students,
-            COALESCE(AVG(r.rating), 0) as rating,
-            COUNT(DISTINCT cm.id) as modules_count
+            COALESCE(e.students, 0) as students,
+            COALESCE(r.rating, 0) as rating,
+            COALESCE(cm.modules_count, 0) as modules_count
         FROM courses c
         LEFT JOIN users u ON c.instructor_id = u.id
         LEFT JOIN categories cat ON c.category_id = cat.id
-        LEFT JOIN enrollments e ON c.id = e.course_id
-        LEFT JOIN reviews r ON c.id = r.course_id
-        LEFT JOIN course_modules cm ON c.id = cm.course_id
-        GROUP BY c.id
+        LEFT JOIN (
+            SELECT course_id, COUNT(*) as students
+            FROM enrollments
+            GROUP BY course_id
+        ) e ON c.id = e.course_id
+        LEFT JOIN (
+            SELECT course_id, AVG(rating) as rating
+            FROM reviews
+            GROUP BY course_id
+        ) r ON c.id = r.course_id
+        LEFT JOIN (
+            SELECT course_id, COUNT(*) as modules_count
+            FROM course_modules
+            GROUP BY course_id
+        ) cm ON c.id = cm.course_id
         ORDER BY c.created_at DESC
     ");
     $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +47,6 @@ try {
             0 as rating,
             0 as modules_count
         FROM courses c
-        GROUP BY c.id
         ORDER BY c.created_at DESC
     ");
     $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);

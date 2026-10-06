@@ -66,12 +66,12 @@ try {
         $stmt->execute($params);
         $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-} catch (Throwable $e) {
-    error_log('LMS resource query failed (' . $type . '): ' . $e->getMessage());
+} catch (Throwable $exception) {
+    error_log('LMS resource query failed (' . $type . '): ' . $exception->getMessage());
     $loadError = 'Resources are temporarily unavailable. Please try again later.';
 }
 
-$e = static fn($value): string => htmlspecialchars((string)($value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+$escapeHtml = static fn($value): string => htmlspecialchars((string)($value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 $safeResourceUrl = static function ($value): string {
     if (!is_string($value) || trim($value) === '') return '';
     $value = trim($value);
@@ -87,39 +87,39 @@ include __DIR__ . '/../sidebar/sidebar.php';
 ?>
 <main class="container-fluid py-4">
   <header class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
-    <div><span class="text-uppercase small text-primary fw-semibold">LEARNING RESOURCES</span><h1 class="h2 fw-bold mb-1"><?= $e($config['title']) ?></h1><p class="text-muted mb-0">Search and browse materials from the academy library.</p></div>
+    <div><span class="text-uppercase small text-primary fw-semibold">LEARNING RESOURCES</span><h1 class="h2 fw-bold mb-1"><?= $escapeHtml($config['title']) ?></h1><p class="text-muted mb-0">Search and browse materials from the academy library.</p></div>
     <span class="badge text-bg-light p-2"><?= number_format($totalItems) ?> resources</span>
   </header>
-  <?php if ($loadError): ?><div class="alert alert-warning" role="status"><?= $e($loadError) ?></div><?php endif; ?>
+  <?php if ($loadError): ?><div class="alert alert-warning" role="status"><?= $escapeHtml($loadError) ?></div><?php endif; ?>
   <?php if ($detail): ?>
     <?php $title=$detail['title']??'Resource'; $body=$detail['content']??$detail['description']??$detail['excerpt']??''; $media=$safeResourceUrl($detail['video_path']??''); ?>
-    <a class="btn btn-outline-secondary mb-3" href="<?= $e(strtok($_SERVER['REQUEST_URI'], '?')) ?>"><i class="bi bi-arrow-left me-1"></i>Back to library</a>
+    <a class="btn btn-outline-secondary mb-3" href="<?= $escapeHtml(strtok($_SERVER['REQUEST_URI'], '?')) ?>"><i class="bi bi-arrow-left me-1"></i>Back to library</a>
     <article class="card border-0 shadow-sm"><div class="card-body p-4 p-lg-5">
-      <span class="badge text-bg-primary mb-3"><?= $e($detail['category']??'Learning resource') ?></span><h2 class="fw-bold"><?= $e($title) ?></h2>
-      <p class="text-muted"><?= $e($detail['author']??$detail['instructor_name']??$detail['course_name']??'') ?></p>
-      <?php if ($type==='videos' && $media): ?><div class="ratio ratio-16x9 mb-4"><video controls preload="metadata" src="<?= $e($media) ?>">Your browser does not support video playback.</video></div><?php endif; ?>
-      <div><?= nl2br($e($body ?: 'Additional details for this resource have not been added yet.')) ?></div>
+      <span class="badge text-bg-primary mb-3"><?= $escapeHtml($detail['category']??'Learning resource') ?></span><h2 class="fw-bold"><?= $escapeHtml($title) ?></h2>
+      <p class="text-muted"><?= $escapeHtml($detail['author']??$detail['instructor_name']??$detail['course_name']??'') ?></p>
+      <?php if ($type==='videos' && $media): ?><div class="ratio ratio-16x9 mb-4"><video controls preload="metadata" src="<?= $escapeHtml($media) ?>">Your browser does not support video playback.</video></div><?php endif; ?>
+      <div><?= nl2br($escapeHtml($body ?: 'Additional details for this resource have not been added yet.')) ?></div>
       <?php if (in_array($type,['documents','ebooks'],true)): $file=$safeResourceUrl($detail['file_path']??''); ?>
-        <div class="mt-4"><?php if($file): ?><a class="btn btn-primary" href="<?= $e($file) ?>" download><i class="bi bi-download me-1"></i>Download file</a><?php else: ?><span class="text-muted">No downloadable file is attached yet.</span><?php endif; ?></div>
+        <div class="mt-4"><?php if($file): ?><a class="btn btn-primary" href="<?= $escapeHtml($file) ?>" download><i class="bi bi-download me-1"></i>Download file</a><?php else: ?><span class="text-muted">No downloadable file is attached yet.</span><?php endif; ?></div>
       <?php elseif ($type==='videos' && !$media): ?><div class="alert alert-info mt-4 mb-0">A video file has not been attached yet.</div><?php endif; ?>
     </div></article>
   <?php else: ?>
     <form method="get" class="card border-0 shadow-sm mb-4"><div class="card-body"><div class="row g-3 align-items-end">
-      <div class="col-lg-6"><label class="form-label" for="resourceSearch">Search</label><input class="form-control" id="resourceSearch" type="search" name="search" value="<?= $e($search) ?>" placeholder="Search titles, topics, authors..."></div>
-      <div class="col-lg-4"><label class="form-label" for="resourceCategory">Category</label><select class="form-select" id="resourceCategory" name="category"><option value="">All categories</option><?php foreach($categories as $option): ?><option value="<?= $e($option) ?>" <?= $category===$option?'selected':'' ?>><?= $e($option) ?></option><?php endforeach; ?></select></div>
-      <div class="col-lg-2 d-flex gap-2"><button class="btn btn-primary flex-grow-1" type="submit">Filter</button><a class="btn btn-outline-secondary" href="<?= $e(strtok($_SERVER['REQUEST_URI'], '?')) ?>">Clear</a></div>
+      <div class="col-lg-6"><label class="form-label" for="resourceSearch">Search</label><input class="form-control" id="resourceSearch" type="search" name="search" value="<?= $escapeHtml($search) ?>" placeholder="Search titles, topics, authors..."></div>
+      <div class="col-lg-4"><label class="form-label" for="resourceCategory">Category</label><select class="form-select" id="resourceCategory" name="category"><option value="">All categories</option><?php foreach($categories as $option): ?><option value="<?= $escapeHtml($option) ?>" <?= $category===$option?'selected':'' ?>><?= $escapeHtml($option) ?></option><?php endforeach; ?></select></div>
+      <div class="col-lg-2 d-flex gap-2"><button class="btn btn-primary flex-grow-1" type="submit">Filter</button><a class="btn btn-outline-secondary" href="<?= $escapeHtml(strtok($_SERVER['REQUEST_URI'], '?')) ?>">Clear</a></div>
     </div></div></form>
     <div class="row g-4">
       <?php foreach($items as $item): $id=(int)$item['id']; $media=$safeResourceUrl($item['thumbnail']??$item['image']??''); ?>
       <div class="col-sm-6 col-xl-4"><article class="card h-100 border-0 shadow-sm">
-        <?php if($type==='videos' && $media): ?><img src="<?= $e($media) ?>" class="card-img-top" alt="" style="height:190px;object-fit:cover"><?php else: ?><div class="d-flex align-items-center justify-content-center bg-light text-primary" style="height:130px"><i class="bi <?= $e($config['icon']) ?> fs-1"></i></div><?php endif; ?>
-        <div class="card-body d-flex flex-column"><div class="d-flex justify-content-between gap-2 mb-2"><span class="badge text-bg-light"><?= $e($item['category']??'General') ?></span><?php if(!empty($item['difficulty_level'])): ?><span class="small text-muted"><?= $e($item['difficulty_level']) ?></span><?php endif; ?></div>
-          <h2 class="h5"><?= $e($item['title']??'Untitled') ?></h2><p class="small text-muted"><?= $e($item['description']??$item['excerpt']??'') ?></p>
-          <div class="small text-muted mb-3"><?php if(!empty($item['author'])): ?>By <?= $e($item['author']) ?><?php elseif(!empty($item['instructor_name'])): ?>By <?= $e($item['instructor_name']) ?><?php endif; ?><?php if(!empty($item['duration'])): ?> | <?= $e($item['duration']) ?><?php endif; ?></div>
+        <?php if($type==='videos' && $media): ?><img src="<?= $escapeHtml($media) ?>" class="card-img-top" alt="" style="height:190px;object-fit:cover"><?php else: ?><div class="d-flex align-items-center justify-content-center bg-light text-primary" style="height:130px"><i class="bi <?= $escapeHtml($config['icon']) ?> fs-1"></i></div><?php endif; ?>
+        <div class="card-body d-flex flex-column"><div class="d-flex justify-content-between gap-2 mb-2"><span class="badge text-bg-light"><?= $escapeHtml($item['category']??'General') ?></span><?php if(!empty($item['difficulty_level'])): ?><span class="small text-muted"><?= $escapeHtml($item['difficulty_level']) ?></span><?php endif; ?></div>
+          <h2 class="h5"><?= $escapeHtml($item['title']??'Untitled') ?></h2><p class="small text-muted"><?= $escapeHtml($item['description']??$item['excerpt']??'') ?></p>
+          <div class="small text-muted mb-3"><?php if(!empty($item['author'])): ?>By <?= $escapeHtml($item['author']) ?><?php elseif(!empty($item['instructor_name'])): ?>By <?= $escapeHtml($item['instructor_name']) ?><?php endif; ?><?php if(!empty($item['duration'])): ?> | <?= $escapeHtml($item['duration']) ?><?php endif; ?></div>
           <div class="mt-auto d-flex justify-content-between align-items-center"><span class="small text-muted"><?php if(isset($item['rating'])): ?>Rating <?= number_format((float)$item['rating'],1) ?><?php elseif(isset($item['downloads'])): ?><?= number_format((int)$item['downloads']) ?> downloads<?php endif; ?></span><a class="btn btn-sm btn-primary" href="?id=<?= $id ?>">View details</a></div>
         </div></article></div>
       <?php endforeach; ?>
-      <?php if(!$items && !$loadError): ?><div class="col-12"><div class="card border-0 text-center p-5"><i class="bi <?= $e($config['icon']) ?> fs-1 text-muted"></i><h2 class="h5 mt-3">No resources found</h2><p class="text-muted mb-0">Try a different search or category.</p></div></div><?php endif; ?>
+      <?php if(!$items && !$loadError): ?><div class="col-12"><div class="card border-0 text-center p-5"><i class="bi <?= $escapeHtml($config['icon']) ?> fs-1 text-muted"></i><h2 class="h5 mt-3">No resources found</h2><p class="text-muted mb-0">Try a different search or category.</p></div></div><?php endif; ?>
     </div>
     <?php $pages=(int)ceil($totalItems/$perPage); if($pages>1): ?><nav class="mt-4" aria-label="Resource pages"><ul class="pagination justify-content-center"><?php for($n=1;$n<=$pages;$n++): ?><li class="page-item <?= $n===$page?'active':'' ?>"><a class="page-link" href="?<?= http_build_query(['search'=>$search,'category'=>$category,'page'=>$n]) ?>"><?= $n ?></a></li><?php endfor; ?></ul></nav><?php endif; ?>
   <?php endif; ?>
