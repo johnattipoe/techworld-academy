@@ -98,6 +98,6 @@ When a page reports a missing asset, compare the URL in the browser console with
 
 - **Redirected to login:** confirm the account exists, has role `student`, and the browser is retaining its PHP session cookie.
 - **Database connection error:** confirm MySQL is running and the root `.env` database settings match the local database.
-- **Missing table or column:** import the base schema and apply the matching SQL migration from `Database/`.
+- **Missing table or column:** import the base schema and apply the matching SQL migration from `Database/`. For an existing database that is missing only `course_modules`, run `php scripts/run_migrations/run_migrations.php` from the repository root after configuring `.env`.
 - **Asset returns 404:** check filename capitalization and use the correct site-root path under `/lms-dashboard/` or `/assets/`.
 - **OAuth button says provider is not configured:** add that provider's client ID and secret to the local `.env` and register the callback URL described in the OAuth setup guide.

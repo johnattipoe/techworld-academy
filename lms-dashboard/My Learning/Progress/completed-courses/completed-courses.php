@@ -38,7 +38,7 @@ try {
         LEFT JOIN categories cat ON c.category_id = cat.id
         LEFT JOIN course_modules cm ON c.id = cm.course_id
         LEFT JOIN course_lessons cl ON cm.id = cl.module_id
-        LEFT JOIN lesson_progress lp ON cl.id = lp.lesson_id AND lp.user_id = e.user_id AND lp.completed = 1
+        LEFT JOIN lesson_progress lp ON cl.id = lp.lesson_id AND lp.user_id = e.user_id AND lp.status = 'completed'
         WHERE e.user_id = :user_id 
         AND e.progress = 100
         GROUP BY e.id, c.id

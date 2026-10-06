@@ -34,9 +34,12 @@ function time_elapsed_string(string $datetime, bool $full = false): string {
 
 session_start();
 $student_count = 0;
+$new_students = 0;
 $page = max(1, (int)($_GET['page'] ?? 1));
 $course_count = 0;
+$new_courses = 0;
 $instructor_count = 0;
+$new_instructors = 0;
 $monthly_revenue = 0;
 $revenue_change = 0;
 $previousRevenue = 0;
@@ -86,14 +89,20 @@ if (!$pdo) {
     // Count students
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'student'");
     $student_count = (int)($stmt->fetch()['count'] ?? 0);
+    $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'student' AND MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
+    $new_students = (int)($stmt->fetch()['count'] ?? 0);
 
     // Count courses (no status column assumed)
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM courses WHERE is_active = 1 AND is_published = 1");
     $course_count = (int)($stmt->fetch()['count'] ?? 0);
+    $stmt = $pdo->query("SELECT COUNT(*) as count FROM courses WHERE MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
+    $new_courses = (int)($stmt->fetch()['count'] ?? 0);
 
     // Count instructors
     $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'instructor'");
     $instructor_count = (int)($stmt->fetch()['count'] ?? 0);
+    $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'instructor' AND MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
+    $new_instructors = (int)($stmt->fetch()['count'] ?? 0);
 
     $roleCounts = ['student' => 0, 'instructor' => 0, 'admin' => 0];
     foreach ($pdo->query('SELECT role, COUNT(*) AS total FROM users GROUP BY role')->fetchAll(PDO::FETCH_ASSOC) as $roleRow) {
@@ -153,7 +162,11 @@ if (!$pdo) {
 
   } catch (PDOException $e) {
     log_action($_SESSION['username'], 'admin_dashboard_stats', $e->getMessage());
+    error_log('Admin dashboard statistics query failed: ' . $e->getMessage());
     $error = 'Error loading dashboard statistics';
+    if (filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
+      $error .= ': ' . $e->getMessage();
+    }
   }
 }
 $pageTitle = 'Admin overview';
@@ -187,12 +200,7 @@ include(__DIR__ . '/../includes/sidebar/sidebar.php');
             <div class="card shadow-sm p-3">
               <span class="admin-stat-icon"><i class="bi bi-people-fill" aria-hidden="true"></i></span><h6 class="mb-1">Total students</h6>
               <h3 class="mb-0"><?= number_format($student_count) ?></h3>
-              <?php
-              // Get last month's count
-              $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'student' AND MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
-              $new_students = $stmt->fetch()['count'];
-              if ($new_students > 0):
-              ?>
+              <?php if ($new_students > 0): ?>
               <small class="text-success">+<?= $new_students ?> this month</small>
               <?php else: ?>
               <small class="text-muted">No change</small>
@@ -203,12 +211,7 @@ include(__DIR__ . '/../includes/sidebar/sidebar.php');
             <div class="card shadow-sm p-3">
               <span class="admin-stat-icon"><i class="bi bi-journal-bookmark-fill" aria-hidden="true"></i></span><h6 class="mb-1">Active courses</h6>
               <h3 class="mb-0"><?= number_format($course_count) ?></h3>
-              <?php
-              // Count new courses this month (no status column assumed)
-              $stmt = $pdo->query("SELECT COUNT(*) as count FROM courses WHERE MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
-              $new_courses = $stmt->fetch()['count'] ?? 0;
-              if ($new_courses > 0):
-              ?>
+              <?php if ($new_courses > 0): ?>
               <small class="text-success">+<?= $new_courses ?> this month</small>
               <?php else: ?>
               <small class="text-muted">No change</small>
@@ -219,11 +222,7 @@ include(__DIR__ . '/../includes/sidebar/sidebar.php');
             <div class="card shadow-sm p-3">
               <span class="admin-stat-icon"><i class="bi bi-person-video3" aria-hidden="true"></i></span><h6 class="mb-1">Instructors</h6>
               <h3 class="mb-0"><?= number_format($instructor_count) ?></h3>
-              <?php
-              $stmt = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'instructor' AND MONTH(created_at) = MONTH(CURRENT_DATE) AND YEAR(created_at) = YEAR(CURRENT_DATE)");
-              $new_instructors = $stmt->fetch()['count'];
-              if ($new_instructors > 0):
-              ?>
+              <?php if ($new_instructors > 0): ?>
               <small class="text-success">+<?= $new_instructors ?> this month</small>
               <?php else: ?>
               <small class="text-muted">No change</small>

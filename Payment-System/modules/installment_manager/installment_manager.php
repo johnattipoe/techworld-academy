@@ -35,7 +35,8 @@ class InstallmentManager {
             ':down_payment' => $data['down_payment'] ?? 0,
             ':number_of_installments' => $data['number_of_installments'],
             ':installment_amount' => $data['installment_amount'],
-            ':interval_type' => $data['interval_type'] ?? 'monthly',
+            // The database enum stores singular values: week, month, quarter, year.
+            ':interval_type' => $data['interval_type'] ?? 'month',
             ':interval_value' => $data['interval_value'] ?? 1,
             ':description' => $data['description'] ?? '',
             ':is_active' => $data['is_active'] ?? 1

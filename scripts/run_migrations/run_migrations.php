@@ -30,6 +30,19 @@ $migrations = [
         FOREIGN KEY (instructor_id) REFERENCES users(id)
     )",
 
+    // LMS course modules
+    "CREATE TABLE IF NOT EXISTS course_modules (
+        id INTEGER PRIMARY KEY AUTO_INCREMENT,
+        course_id INTEGER NOT NULL,
+        title VARCHAR(200) NOT NULL,
+        description TEXT DEFAULT NULL,
+        order_number INTEGER NOT NULL DEFAULT 1,
+        is_active TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_course_modules_course_order (course_id, order_number)
+    )",
+
     // enrollments
     "CREATE TABLE IF NOT EXISTS enrollments (
         id INTEGER PRIMARY KEY AUTO_INCREMENT,

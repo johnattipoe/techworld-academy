@@ -26,7 +26,9 @@ $csrf_token = CSRF::generateToken();
   <meta name="robots" content="index, follow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" type="image/jpeg" href="/assets/images/logo.jpeg">
+  <link rel="shortcut icon" href="/assets/images/logo.jpeg">
+  <link rel="apple-touch-icon" href="/assets/images/logo.jpeg">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

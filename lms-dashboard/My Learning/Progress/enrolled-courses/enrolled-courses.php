@@ -37,9 +37,9 @@ try {
                 SELECT cl2.title 
                 FROM course_lessons cl2
                 INNER JOIN course_modules cm2 ON cl2.module_id = cm2.id
-                LEFT JOIN lesson_progress lp2 ON cl2.id = lp2.lesson_id AND lp2.user_id = e.user_id AND lp2.completed = 1
+                LEFT JOIN lesson_progress lp2 ON cl2.id = lp2.lesson_id AND lp2.user_id = e.user_id AND lp2.status = 'completed'
                 WHERE cm2.course_id = c.id AND lp2.id IS NULL
-                ORDER BY cm2.order_position ASC, cl2.order_position ASC
+                ORDER BY cm2.order_number ASC, cl2.order_number ASC
                 LIMIT 1
             ) as next_lesson
         FROM enrollments e
@@ -48,7 +48,7 @@ try {
         LEFT JOIN categories cat ON c.category_id = cat.id
         LEFT JOIN course_modules cm ON c.id = cm.course_id
         LEFT JOIN course_lessons cl ON cm.id = cl.module_id
-        LEFT JOIN lesson_progress lp ON cl.id = lp.lesson_id AND lp.user_id = e.user_id AND lp.completed = 1
+        LEFT JOIN lesson_progress lp ON cl.id = lp.lesson_id AND lp.user_id = e.user_id AND lp.status = 'completed'
         WHERE e.user_id = :user_id
         GROUP BY e.id, c.id
         ORDER BY e.last_accessed DESC
