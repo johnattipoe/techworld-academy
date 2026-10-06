@@ -74,9 +74,36 @@ if (!$pdo) {
     $error = 'Database connection failed';
 } else {
     log_action($_SESSION['username'], 'admin_dashboard_access', 'success');
-    
-  // Get dashboard statistics
-  try {
+
+  // Check the dashboard's required schema first so incomplete imports are actionable.
+  $dashboardSchema = [
+    'enrollments' => ['id', 'user_id', 'course_id', 'status', 'created_at'],
+    'users' => ['id', 'username', 'full_name', 'role', 'created_at'],
+    'courses' => ['id', 'title', 'created_at', 'is_active', 'is_published'],
+    'payments' => ['final_amount', 'status', 'paid_at', 'currency'],
+    'notifications' => ['user_id', 'title', 'message', 'read_at', 'created_at'],
+  ];
+  $schemaIssues = [];
+  foreach ($dashboardSchema as $table => $requiredColumns) {
+    try {
+      $columnStmt = $pdo->query("SHOW COLUMNS FROM `{$table}`");
+      $availableColumns = $columnStmt->fetchAll(PDO::FETCH_COLUMN, 0);
+      $missingColumns = array_diff($requiredColumns, $availableColumns);
+      if ($missingColumns) {
+        $schemaIssues[] = $table . ' missing columns: ' . implode(', ', $missingColumns);
+      }
+    } catch (PDOException $schemaException) {
+      $schemaIssues[] = $table . ' table is missing';
+    }
+  }
+
+  if ($schemaIssues) {
+    $error = 'Dashboard database schema is incomplete: ' . implode('; ', $schemaIssues) . '. Import or migrate the schema for the database configured in .env.';
+    error_log($error);
+    log_action($_SESSION['username'], 'admin_dashboard_schema', implode('; ', $schemaIssues));
+  } else {
+    // Get dashboard statistics
+    try {
     $trendStart = $enrollment_month_cursor->modify('-11 months')->format('Y-m-01 00:00:00');
     $trendEnd = $enrollment_month_cursor->modify('+1 month')->format('Y-m-d H:i:s');
     $trendStmt = $pdo->prepare("SELECT DATE_FORMAT(created_at, '%Y-%m') AS month_key, COUNT(*) AS total FROM enrollments WHERE created_at >= ? AND created_at < ? GROUP BY month_key");
@@ -167,6 +194,7 @@ if (!$pdo) {
     if (filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
       $error .= ': ' . $e->getMessage();
     }
+  }
   }
 }
 $pageTitle = 'Admin overview';
